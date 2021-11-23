@@ -22,6 +22,39 @@
             $resource = $sentence->fetch(PDO::FETCH_OBJ);
             return $resource;
         }
+
+        public function filterSeason($season) {
+            $sentence = $this->db->prepare('SELECT * FROM recursos WHERE germinacion=?');
+            $sentence->execute([$season]);
+
+            $resources = $sentence->fetchAll(PDO::FETCH_OBJ);
+            return $resources;
+        }
+
+        public function filterZone($zone) {
+            $sentence = $this->db->prepare('SELECT id_recurso, recurso FROM recursos WHERE id_zona=?');
+            $sentence->execute([$zone]);
+
+            $resources = $sentence->fetchAll(PDO::FETCH_OBJ);
+            return $resources;
+        }
+
+        public function countZone($zone) {
+            $sentence = $this->db->prepare('SELECT COUNT(*) AS count_zone FROM recursos WHERE id_zona=? GROUP BY id_zona');
+            $sentence->execute([$zone]);
+
+            $countZone = $sentence->fetch(PDO::FETCH_OBJ);
+            return $countZone;
+
+        }
+
+        public function countSeason($season) {
+            $sentence = $this->db->prepare('SELECT COUNT(*) AS count_season, germinacion FROM recursos WHERE germinacion=? GROUP BY germinacion');
+            $sentence->execute([$season]);
+
+            $countSeason = $sentence->fetch(PDO::FETCH_OBJ);
+            return $countSeason;
+        }
         
         public function getAllReviews(){
             $sentence = $this->db->prepare('SELECT * FROM reseñas WHERE 1');

@@ -26,6 +26,36 @@ class resourcesController{
         $this->view->renderDetails($resource);
     }
 
+    public function goToFilters() {
+        if ($this->authHelper->checkIfLogged() XOR $this->authHelper->checkIfAdminLogged()) {
+            $zones = $this->modelZ->getZones();
+            $this->view->renderFilters($zones);
+        } else {
+            $this->viewU->renderLogin();
+        }
+    }
+
+    public function goToFilterSeason() {
+        if ($this->authHelper->checkIfLogged() XOR $this->authHelper->checkIfAdminLogged()) {
+            $resources = $this->modelR->filterSeason($_POST['season']);
+            $countSeason = $this->modelR->countSeason($_POST['season']);
+            $this->view->renderFilterSeason($resources, $countSeason);
+        } else {
+            $this->viewU->renderLogin();
+        }
+    }
+
+    public function goToFilterZone() {
+        if ($this->authHelper->checkIfLogged() XOR $this->authHelper->checkIfAdminLogged()) {
+            $zone = $this->modelZ->getOneZone($_POST['zone']);
+            $resources = $this->modelR->filterZone($_POST['zone']);
+            $count = $this->modelR->countZone($_POST['zone']);
+            $this->view->renderFilterZone($resources, $zone, $count);
+        } else {
+            $this->viewU->renderLogin();
+        }
+    }
+
     public function goToTableResources() {
         if ($this->authHelper->checkIfLogged() XOR $this->authHelper->checkIfAdminLogged()) {
             $resources = $this->modelR->getResources();

@@ -29,6 +29,10 @@ h2 {
     margin-bottom: 20px;
 }
 
+h3.undertitle {
+    margin-top: 20px;
+}
+
 ul {
     margin: 15px 0px 5px 0px;
 }

@@ -88,8 +88,15 @@ require_once 'Controllers/zonesController.php';
         case 'updateZone':      
             $zonesController->goToUpdateZone();
             break;
-        case 'requestZones':                       
-            $zonesController->goToZones();
+        case 'filters':        
+            $resourcesController->goToFilters();  
+            break;
+        case 'filter':
+            if ($parameters[1] == "season") {
+                $resourcesController->goToFilterSeason();
+            } else if ($parameters[1] == "zone"){
+                $resourcesController->goToFilterZone();
+            }
             break;
         case 'resourcesPerZone':
             $zonesController->goToResourcesPerZone($parameters[1], $parameters[2]); 

@@ -42,6 +42,7 @@ async function insertReview(e){
     try {
         let res = await fetch (API_URL, {
             "method": "POST",
+            "mode": 'cors',
             "headers": {"Content-type": "application/json"},
             "body": JSON.stringify(reviewObj)
         });
@@ -52,3 +53,4 @@ async function insertReview(e){
         console.error();
     }
 }
+

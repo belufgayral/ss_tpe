@@ -18,11 +18,6 @@ class zonesController{
         $this->authHelper = new AuthHelper();
     }
 
-    public function goToZones() {
-        $zones = $this->model->getZones();
-        $this->view->renderZones($zones);
-    }
-
     public function goToResourcesPerZone($id, $zone) {
         $resources = $this->model->getResourcesPerZone($id);
         $this->view->renderResourcesPerZone($resources, $zone);
