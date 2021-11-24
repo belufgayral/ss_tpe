@@ -18,21 +18,26 @@ const API_URL = 'api/recurso';
 
 /* const btnGet = document.querySelector("#getAll");
 btnGet.addEventListener("click", getReviews); */
+const id_item = document.querySelector("#resource").getAttribute("id_resource");
 const btnPost = document.querySelector("#post");
 btnPost.addEventListener("click", insertReview);
 
 getReviews();
 getIfAdminSession();
+console.log(id_item);
 
 async function getReviews() {
+    console.log(`${API_URL}/${id_item}`)
     try {
-        let response = await fetch(API_URL);   
+        let response = await fetch(`${API_URL}/${id_item}`);   
         let reviews = await response.json();
 
+        console.log(reviews); 
         app.reviews = reviews; //convierte el arreglo traido por GET para el vue, para que se lea como reviews
-        console.log(reviews);
-    } catch (e) {
-        console.log(e);
+
+    } catch (error) {
+        console.log("hola");
+        console.error();
     }
 }
 
@@ -43,7 +48,7 @@ async function getIfAdminSession(){
         console.log(session);
         app.admin = session;
     } catch (error) {
-        console.log(error);
+        console.error();
     }
 }
 
@@ -64,7 +69,6 @@ async function insertReview(e){
     let reviewObj = {
         "review": formData.get('review'),
 		"valoracion": parseInt(formData.get('value')),
-        "id_user": null,
         "id_recurso": parseInt(formData.get('id')),
     }
 

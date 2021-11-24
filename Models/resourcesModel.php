@@ -56,9 +56,9 @@
             return $countSeason;
         }
         
-        public function getAllReviews(){
-            $sentence = $this->db->prepare('SELECT * FROM reseñas WHERE 1');
-            $sentence->execute();
+        public function getReviewsByResource($id_resource){
+            $sentence = $this->db->prepare('SELECT * FROM reseñas WHERE id_recurso=?');
+            $sentence->execute([$id_resource]);
 
             $reviews = $sentence->fetchAll(PDO::FETCH_OBJ);
             return $reviews;

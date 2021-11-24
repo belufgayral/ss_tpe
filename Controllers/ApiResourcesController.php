@@ -18,9 +18,15 @@ class ApiResourcesController{
         $this->helper = new AuthHelper();
     }
 
-    public function getReviews(){
-        $reviews = $this->model->getAllReviews(); 
-        return $this->view->response($reviews, 200); 
+    public function getReviewsByResource($params = null){
+        $id_resource = $params[':ID'];
+        $reviews = $this->model->getReviewsByResource($id_resource); 
+
+        if ($reviews) {
+            $this->view->response($reviews, 200); 
+        } else {
+            $this->view->response("Los comentarios no fueron encontrados", 404);
+        }
     }
 
     public function getAdminSession(){
