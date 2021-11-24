@@ -8,23 +8,29 @@
 {else} --
 {/if}
 </p>
-<input type="hidden" id=rol value="{$rol}">
+{* <input type="hidden" id=rol value="{$rol}"> *}
 <p>Zona donde se encuentra: {$resource->zona}</p>
 
 {if $resource->imagen}
     <p><img src={$resource->imagen}></p>
 {/if}
-
-<form id="form">
+{if $rol == 'user'}
+    <form id="form">
     <input placeholder="Introduce tu reseña de {$resource->recurso|lower}" type="text" size="90" id="review" name="review" required>
     <label for="value">Dar valoración:</label>
     <input type="number" id="value" name="value" min=1 max=5 required>
     <select name="id">
         <option>{$resource->id_recurso}</option>
     </select>
-    <button type="submit" id="post" class="btn btn-primary">Enviar</button>
     {* <button type="submit" id="getAll" class="btn btn-primary">Ver reseñas anteriores!</button> *}
-</form>
+    </form>
+{/if}
+
+{if $rol == 'admin' || $rol == 'anon'}
+    <button style="display: none;" type="submit" id="post" class="btn btn-primary">Enviar</button>
+{else}
+    <button type="submit" id="post" class="btn btn-primary">Enviar</button>
+{/if}
 
 {include file="vue/review-list.tpl"}
 
