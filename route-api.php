@@ -6,6 +6,7 @@ require_once 'Controllers/ApiResourcesController.php';
 $router = new Router();
 
 $router->addRoute('recurso', 'GET', 'ApiResourcesController', 'getReviews');
+$router->addRoute('recurso/session', 'GET', 'ApiResourcesController', 'getAdminSession');
 $router->addRoute('recurso/:ID', 'GET', 'ApiResourcesController', 'getReview');
 $router->addRoute('recurso/:ID', 'DELETE', 'ApiResourcesController', 'deleteReview');
 $router->addRoute('recurso', 'POST', 'ApiResourcesController', 'insertReviewValue');

@@ -4,6 +4,7 @@ let app = new Vue({
     el: "#list",
     data: {
         titulo: "Comentarios",
+        admin: false,
         reviews: [],
     },
     methods: {
@@ -21,16 +22,28 @@ const btnPost = document.querySelector("#post");
 btnPost.addEventListener("click", insertReview);
 
 getReviews();
+getIfAdminSession();
 
 async function getReviews() {
     try {
         let response = await fetch(API_URL);   
         let reviews = await response.json();
 
-        app.reviews = reviews;
+        app.reviews = reviews; //convierte el arreglo traido por GET para el vue, para que se lea como reviews
         console.log(reviews);
     } catch (e) {
         console.log(e);
+    }
+}
+
+async function getIfAdminSession(){
+    try {
+        let res = await fetch(`${API_URL}/session`);
+        let session = await res.json();
+        console.log(session);
+        app.admin = session;
+    } catch (error) {
+        console.log(error);
     }
 }
 

@@ -2,25 +2,32 @@
 require_once "./Models/resourcesModel.php";
 require_once "./Views/ApiView.php";
 require_once "./Models/generalModel.php";
+require_once "./Helpers/AuthHelper.php";
 
 class ApiResourcesController{
 
     private $model;
     private $view;
     private $modelG;
+    private $helper;
 
     function __construct(){
         $this->model = new resourcesModel();
         $this->view = new ApiView();
         $this->modelG = new generalModel();
+        $this->helper = new AuthHelper();
     }
 
     public function getReviews(){
         $reviews = $this->model->getAllReviews(); 
         return $this->view->response($reviews, 200); 
     }
-    /*
 
+    public function getAdminSession(){
+        $boolSession = $this->helper->checkIfAdminLogged(); //si es admin la varaible guardará true, sino, guardará false
+        return $this->view->response($boolSession, 200); //retorno el booleano conseguido
+    }
+    /*
     function obtenerTarea($params = null) { 
         $idTarea = $params[":ID"]; 
         $tarea = $this->model->getTask($idTarea); 
