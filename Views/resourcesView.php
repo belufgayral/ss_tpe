@@ -19,8 +19,9 @@ require_once "./libs/smarty-3.1.39/libs/Smarty.class.php";
             $this->smarty->display('templates/resourcesForm.tpl');
         }
 
-        public function renderDetails($resource) {
+        public function renderDetails($resource, $rol) {
             $this->smarty->assign('resource', $resource);
+            $this->smarty->assign('rol', $rol);
             $this->smarty->display('templates/resourcesDetails.tpl');
         }
         

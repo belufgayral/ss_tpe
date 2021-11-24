@@ -8,7 +8,7 @@
 {else} --
 {/if}
 </p>
-
+<input type="hidden" id=rol value="{$rol}">
 <p>Zona donde se encuentra: {$resource->zona}</p>
 
 {if $resource->imagen}

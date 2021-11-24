@@ -22,8 +22,18 @@ class resourcesController{
     }
 
     public function goToDetails($id) { // este debería dejarlo en recursos
+        if ($this->authHelper->checkIfAdminLogged()) {
+            $rol = "admin";
+        }
+        else if ($this->authHelper->checkIfLogged()) {
+            $rol = "user";
+        }
+        else {
+            $rol = "anon";
+        }
+        
         $resource = $this->modelR->getOneResource($id);
-        $this->view->renderDetails($resource);
+        $this->view->renderDetails($resource, $rol);
     }
 
     public function goToFilters() {
