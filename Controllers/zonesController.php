@@ -18,10 +18,10 @@ class zonesController{
         $this->authHelper = new AuthHelper();
     }
 
-    public function goToResourcesPerZone($id, $zone) {
+    /* public function goToResourcesPerZone($id, $zone) {
         $resources = $this->model->getResourcesPerZone($id);
         $this->view->renderResourcesPerZone($resources, $zone);
-    }
+    } */
 
     public function goToTableZones() {
         if ($this->authHelper->checkIfLogged() XOR $this->authHelper->checkIfAdminLogged()) {

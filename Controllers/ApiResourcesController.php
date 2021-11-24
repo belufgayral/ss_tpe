@@ -1,18 +1,21 @@
 <?php
 require_once "./Models/resourcesModel.php";
 require_once "./Views/ApiView.php";
+require_once "./Models/generalModel.php";
 
 class ApiResourcesController{
 
     private $model;
     private $view;
+    private $modelG;
 
     function __construct(){
         $this->model = new resourcesModel();
         $this->view = new ApiView();
+        $this->modelG = new generalModel();
     }
 
-     function getReviews(){
+    public function getReviews(){
         $reviews = $this->model->getAllReviews(); 
         return $this->view->response($reviews, 200); 
     }
@@ -40,11 +43,12 @@ class ApiResourcesController{
         }
     } */
 
-    function insertReviewValue() { 
+    public function insertReviewValue() { 
         $body = $this->getBody(); 
+        /* $user = $this->modelG->getUserByEmail($_SESSION['user']); */ // encontrar la forma de conseguir el id de usuario
         /* print_r($body->reseña); */
-		if ($body->reseña/*  && $body->valoracion */){
-			$id = $this->model->addReview($body->reseña, $body->valoracion); 
+		if ($body->review/*  && $body->valoracion */){
+			$id = $this->model->addReview($body->review, $body->valoracion, 0, $body->id_recurso); // id_user harcodeado
 			if ($id != 0) {
 				$this->view->response("La reseña y valoracion se insertaron con el id=$id", 200);
 			} else {
@@ -53,6 +57,18 @@ class ApiResourcesController{
 		} else {
 			$this->view->response("No se pudo decodear el json", 311);
 		}
+    }
+
+    public function deleteReview($params = null) {
+        $id = $params[':ID'];
+        $review = $this->model->getReview($id);
+
+        if ($review) {
+            $this->model->deleteReview($id);
+            $this->view->response("El comentario de id=$id fue eliminado", 200);
+        } else {
+            $this->view->response("El comentario no fue encontrado", 404);
+        }
     }
 
    /*  function actualizarTarea($params = null) { 

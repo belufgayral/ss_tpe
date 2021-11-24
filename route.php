@@ -98,9 +98,9 @@ require_once 'Controllers/zonesController.php';
                 $resourcesController->goToFilterZone();
             }
             break;
-        case 'resourcesPerZone':
+        /* case 'resourcesPerZone':
             $zonesController->goToResourcesPerZone($parameters[1], $parameters[2]); 
-            break;
+            break; */
         default:
             $generalController->goToError();
             break;

@@ -16,14 +16,18 @@
 {/if}
 
 <form id="form">
-<input placeholder="Introduce tu reseña de {$resource->recurso|lower}" type="text" size="110" id="review" name="review">
-<label for="value">Dar valoración</label>
-<input type="number" id="value" name="value">
-<button type="submit" id="post" class="btn btn-primary">Enviar reseña y valoración!</button>
-<button type="submit" id="getAll" class="btn btn-primary">Ver reseñas anteriores!</button>
+    <input placeholder="Introduce tu reseña de {$resource->recurso|lower}" type="text" size="90" id="review" name="review" required>
+    <label for="value">Dar valoración:</label>
+    <input type="number" id="value" name="value" min=1 max=5 required>
+    <select name="id">
+        <option>{$resource->id_recurso}</option>
+    </select>
+    <button type="submit" id="post" class="btn btn-primary">Enviar</button>
+    {* <button type="submit" id="getAll" class="btn btn-primary">Ver reseñas anteriores!</button> *}
 </form>
-<ul id="list">
-</ul>
+
+{include file="vue/review-list.tpl"}
+
 {include file="js.tpl"}
 {include file="redirectHome.tpl"}
 {include file="footer.tpl"}

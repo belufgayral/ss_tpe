@@ -38,10 +38,10 @@
             $sentence->execute([$zone, $prefecture, $city, $id]);
         }
 
-        public function getResourcesPerZone($id) {
+        /* public function getResourcesPerZone($id) {
             $sentence = $this->db->prepare('SELECT a.recurso, a.id_recurso, b.zona FROM recursos AS a LEFT JOIN zonas AS b ON a.id_zona = b.id_zona WHERE b.id_zona=?');
             $sentence->execute([$id]);
             $resources = $sentence->fetchAll(PDO::FETCH_OBJ);
             return $resources;
-        }
+        } */
     }

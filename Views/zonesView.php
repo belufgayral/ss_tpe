@@ -31,9 +31,9 @@ require_once "./libs/smarty-3.1.39/libs/Smarty.class.php";
             $this->smarty->display('templates/zones.tpl');
         }
 
-        public function renderResourcesPerZone($resources, $zone) { 
+        /* public function renderResourcesPerZone($resources, $zone) { 
             $this->smarty->assign('resources', $resources);
             $this->smarty->assign('zone', $zone);
             $this->smarty->display('templates/resourcesPerZone.tpl');
-        }
+        } */
     }
