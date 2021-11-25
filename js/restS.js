@@ -42,8 +42,10 @@ async function getReviews() {
 }
 
 async function getIfAdminSession(){
+    
     try {
-        let res = await fetch(`${API_URL}/session`);
+        console.log("hi");
+        let res = await fetch(API_URL);
         let session = await res.json();
         console.log(session);
         app.admin = session;

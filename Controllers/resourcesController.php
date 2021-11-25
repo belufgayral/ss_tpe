@@ -3,7 +3,7 @@ require_once './Models/resourcesModel.php';
 require_once './Views/resourcesView.php';
 require_once './Models/zonesModel.php';
 require_once './Helpers/AuthHelper.php';
-require_once './Views/generalView.php';
+require_once './Views/userView.php';
 
 class resourcesController{
 
@@ -17,7 +17,7 @@ class resourcesController{
         $this->modelR = new resourcesModel();
         $this->modelZ = new zonesModel();
         $this->view = new resourcesView();
-        $this->viewU = new generalView();
+        $this->viewU = new userView();
         $this->authHelper = new AuthHelper();
     }
 
