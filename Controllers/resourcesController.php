@@ -91,6 +91,16 @@ class resourcesController{
         }
     }
 
+    public function goToWarning($id) {
+        if ($this->authHelper->checkIfAdminLogged()) {
+            $resource = $this->modelR->getOneResource($id);
+            $this->view->renderWarning($id, $resource->recurso);
+        } else {
+            $this->viewU->renderLogin();
+        }
+
+    }
+
     public function goToDeleteResource($id) {
         if ($this->authHelper->checkIfAdminLogged()) {
             $this->modelR->deleteResource($id);

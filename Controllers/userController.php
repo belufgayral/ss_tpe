@@ -114,10 +114,10 @@ class userController{
         $this->goToPanel();
     }
 
-    public function goToWarning($id) { // aca viene el id del usuario
+    /* public function goToWarning($id) { // aca viene el id del usuario
         $user = $this->modelU->getUserById($id); //trae el usuario por id
         $this->view->renderWarning($id, $user->email); //renderizo la advertencia con el email del usuario y el id por param
-    }
+    } */
 
     public function goToDeleteUser($id) { // viene el id del warning.tpl //la sesión de un usuario eliminado permanece abierta
         if ($this->authHelper->checkIfAdminLogged()) { // se hace un chequeo si sos admin
