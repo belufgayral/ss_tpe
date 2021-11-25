@@ -34,8 +34,4 @@
             $sentence->execute([$id]);
         }
 		
-        public function deleteResource($id) {
-            $sentence = $this->db->prepare('DELETE FROM recursos WHERE id_recurso=?');
-            $sentence->execute([$id]);
-        }
     }
