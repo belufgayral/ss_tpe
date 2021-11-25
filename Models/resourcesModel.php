@@ -82,4 +82,9 @@
             $sentence = $this->db->prepare('UPDATE recursos SET recurso=?, germinacion=?, id_zona=? WHERE id_recurso=?');
             $sentence->execute([$resource, $season, $zone, $id]);
         }
+
+        public function deleteResource($id) {
+            $sentence = $this->db->prepare('DELETE FROM recursos WHERE id_recurso=?');
+            $sentence->execute([$id]);
+        }
     }

@@ -50,6 +50,7 @@ async function getIfAdminSession(){
         console.log(session);
         app.admin = session;
     } catch (error) {
+        console.log("error");
         console.error();
     }
 }

@@ -20,7 +20,7 @@ class apiReviewsController{
         $reviews = $this->model->getReviewsByResource($id_resource); 
 
         if ($reviews) {
-            $this->view->response($reviews, 200); 
+            return $this->view->response($reviews, 200); 
         } else {
             $this->view->response("Los comentarios no fueron encontrados", 404);
         }
@@ -28,7 +28,12 @@ class apiReviewsController{
 
     public function getAdminSession(){
         $boolSession = $this->helper->checkIfAdminLogged(); //si es admin la varaible guardará true, sino, guardará false
-        return $this->view->response($boolSession, 200); //retorno el booleano conseguido
+        
+        if ($boolSession) {
+            return $this->view->response($boolSession, 200); //retorno el booleano conseguido
+        } else {
+            $this->view->response("Algo salió mal", 404);
+        }
     }
 
     public function insertReviewValue() { 
