@@ -28,7 +28,7 @@
                 {/if}
                 {if $admin}
                     <td><a href="{BASE_URL}getUpdate/resource/{$resource->id_recurso}">Modificar</a></td>
-                    <td><a href="{BASE_URL}delete/resource/{$resource->id_recurso}">Eliminar</a></td>
+                    <td><a href="{BASE_URL}warning/resource/{$resource->id_recurso}">Eliminar</a></td>
                     {if $resource->imagen}
                         <td><a href="{BASE_URL}delete/image/{$resource->id_recurso}">x</a></td>
                     {else}

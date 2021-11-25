@@ -69,8 +69,8 @@ require_once 'Controllers/zonesController.php';
         case 'warning':
             if ($parameters[1] == "zone") {
                 $zonesController->goToWarning($parameters[2]);
-            } else if ($parameters[1] == "panel") {
-                $userController->goToWarning($parameters[2]);
+            } else if ($parameters[1] == "resource") {
+                $resourcesController->goToWarning($parameters[2]);
             }
             break;
         case 'getUpdate':

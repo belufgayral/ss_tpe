@@ -46,6 +46,15 @@ require_once "./libs/smarty-3.1.39/libs/Smarty.class.php";
             $this->smarty->display('templates/filterZone.tpl');
         }
 
+        public function renderWarning($id, $resource) {
+            $this->smarty->assign('id', $id);
+            $this->smarty->assign('deleted', $resource);
+            $this->smarty->assign('risk', "comentarios y valoraciones");
+            $this->smarty->assign('param1', "resource");
+            $this->smarty->assign('param2', "resources");
+            $this->smarty->display('templates/warning.tpl');
+        }
+
         public function renderErrorPage() {
             $this->smarty->display('templates/errorPage.tpl');
         }
