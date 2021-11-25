@@ -7,7 +7,8 @@ let app = new Vue({
         admin: false,
         reviews: [],
         reviewsByOrd: [],
-        reviewBool: false
+        reviewBool: false,
+        reviewEmpty: false
     },
     methods: {
         deleteR: function(id) {
@@ -37,7 +38,12 @@ async function getReviews() {
     try {
         let response = await fetch(`${API_URL}/${id_item}`);   
         let reviews = await response.json();
-
+        console.log(reviews);
+        if (reviews == "Los comentarios no fueron encontrados") {
+            app.reviewEmpty = true;
+        } else if (reviews !== "Los comentarios no fueron encontrados"){
+            app.reviewEmpty = false;
+        }
         console.log(reviews); 
         app.reviews = reviews; //convierte el arreglo traido por GET para el vue, para que se lea como reviews
         app.reviewBool = true;
