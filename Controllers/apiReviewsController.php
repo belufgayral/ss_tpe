@@ -26,13 +26,33 @@ class apiReviewsController{
         }
     }
 
+    public function getReviewsByOrderAsc($params = null){
+        $id = $params[':ID'];
+            $reviewsByOrd = $this->model->getReviewsByOrderAsc($id);
+            if ($reviewsByOrd) {
+                return $this->view->response($reviewsByOrd, 200); 
+            } else {
+                $this->view->response("Los comentarios no fueron encontrados", 404);
+            }
+    }
+
+    public function getReviewsByOrderDesc($params = null){
+        $id = $params[':ID'];
+        $reviewsByOrd = $this->model->getReviewsByOrderDesc($id);
+        if ($reviewsByOrd) {
+            return $this->view->response($reviewsByOrd, 200); 
+        } else {
+            $this->view->response("Los comentarios no fueron encontrados", 404);
+        }
+    }
+
     public function getAdminSession(){
         $boolSession = $this->helper->checkIfAdminLogged(); //si es admin la varaible guardará true, sino, guardará false
         
         if ($boolSession) {
             return $this->view->response($boolSession, 200); //retorno el booleano conseguido
         } else {
-            $this->view->response("Algo salió mal", 404);
+            $this->view->response("Usted no es administrador o administradora", 404);
         }
     }
 
@@ -40,7 +60,7 @@ class apiReviewsController{
         $body = $this->getBody(); 
         
 		if ($body->review && $body->valoracion){
-			$id = $this->model->addReview($body->review, $body->valoracion, 0, $body->id_recurso); // id_user harcodeado
+			$id = $this->model->addReview($body->review, $body->valoracion, $body->id_recurso);
 			if ($id != 0) {
 				$this->view->response("La reseña y valoracion se insertaron con el id=$id", 200);
 			} else {

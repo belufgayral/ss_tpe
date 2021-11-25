@@ -31,6 +31,13 @@
 {else}
     <button type="submit" id="post" class="btn btn-primary">Enviar</button>
 {/if}
+{if $rol == 'user'}
+<button type="submit" id="order-asc" class="btn btn-primary" value="asc">Orden ascendente</button>
+<button type="submit" id="order-desc" class="btn btn-primary" value="desc">Orden descendente</button>
+{else}
+<button style="display: none;" type="submit" id="order-asc" class="btn btn-primary" value="asc">Orden ascendente</button>
+<button style="display: none;" type="submit" id="order-desc" class="btn btn-primary" value="desc">Orden descendente</button>
+{/if}
 
 {include file="vue/review-list.tpl"}
 

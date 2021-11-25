@@ -15,9 +15,25 @@
             return $reviews;
         }
 
-        public function addReview($review, $value, $id_user, $id_resource){ //esta funcion introduce una reseña y valoracion
-            $sentence = $this->db->prepare('INSERT INTO reseñas(review, valoracion, id_user, id_recurso) VALUES(?, ?, ?, ?)');
-            $sentence->execute(array($review, $value, $id_user, $id_resource));
+        public function getReviewsByOrderAsc($id){
+            $sentence = $this->db->prepare('SELECT * FROM reseñas WHERE id_recurso = ? ORDER BY valoracion');
+            $sentence->execute([$id]);
+
+            $reviewsByOrd = $sentence->fetchAll(PDO::FETCH_OBJ);
+            return $reviewsByOrd;
+        }
+
+        public function getReviewsByOrderDesc($id){
+            $sentence = $this->db->prepare('SELECT * FROM reseñas WHERE id_recurso = ? ORDER BY valoracion DESC');
+            $sentence->execute([$id]);
+
+            $reviewsByOrd = $sentence->fetchAll(PDO::FETCH_OBJ);
+            return $reviewsByOrd;
+        }
+
+        public function addReview($review, $value, $id_resource){
+            $sentence = $this->db->prepare('INSERT INTO reseñas(review, valoracion, id_recurso) VALUES(?, ?, ?)');
+            $sentence->execute(array($review, $value, $id_resource));
             return $this->db->lastInsertId();
         }
 

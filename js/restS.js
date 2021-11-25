@@ -6,6 +6,8 @@ let app = new Vue({
         titulo: "Comentarios",
         admin: false,
         reviews: [],
+        reviewsByOrd: [],
+        reviewBool: false
     },
     methods: {
         deleteR: function(id) {
@@ -21,6 +23,10 @@ btnGet.addEventListener("click", getReviews); */
 const id_item = document.querySelector("#resource").getAttribute("id_resource");
 const btnPost = document.querySelector("#post");
 btnPost.addEventListener("click", insertReview);
+const btnOrderAsc = document.querySelector("#order-asc");
+btnOrderAsc.addEventListener("click", getReviewsByOrderAsc);
+const btnOrderDesc = document.querySelector("#order-desc");
+btnOrderDesc.addEventListener("click", getReviewsByOrderDesc);
 
 getReviews();
 getIfAdminSession();
@@ -34,9 +40,35 @@ async function getReviews() {
 
         console.log(reviews); 
         app.reviews = reviews; //convierte el arreglo traido por GET para el vue, para que se lea como reviews
-
+        app.reviewBool = true;
     } catch (error) {
         console.log("hola");
+        console.error();
+    }
+}
+
+async function getReviewsByOrderAsc(){
+    let order = document.querySelector("#order-asc").value;
+    try {
+        let response = await fetch(`${API_URL}/${order}/${id_item}`);
+        let reviewsByOrder = await response.json();
+
+        app.reviewsByOrd = reviewsByOrder;
+        app.reviewBool = false;
+    } catch (error) {
+        console.error();
+    }
+}
+
+async function getReviewsByOrderDesc(){
+    let order = document.querySelector("#order-desc").value;
+    try {
+        let response = await fetch(`${API_URL}/${order}/${id_item}`);
+        let reviewsByOrder = await response.json();
+
+        app.reviewsByOrd = reviewsByOrder;
+        app.reviewBool = false;
+    } catch (error) {
         console.error();
     }
 }
@@ -55,15 +87,6 @@ async function getIfAdminSession(){
     }
 }
 
-/* async function render(reviews) {
-    let list = document.querySelector("#list");
-    list.innerHTML = "";
-    
-    for (const review of reviews) {
-        let html = `<li>${review.review}</li>`;
-        list.innerHTML += html;
-    }
-} */
 
 async function insertReview(e){
     e.preventDefault();
