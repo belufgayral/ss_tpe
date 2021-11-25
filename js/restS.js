@@ -42,12 +42,15 @@ async function getReviews() {
 }
 
 async function getIfAdminSession(){
+    console.log("funcion anda");
     try {
-        let res = await fetch(`${API_URL}/session`);
+        console.log("anda?")
+        let res = await fetch(API_URL);
         let session = await res.json();
         console.log(session);
         app.admin = session;
     } catch (error) {
+        console.log("error");
         console.error();
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2021 a las 23:17:30
+-- Tiempo de generación: 25-11-2021 a las 01:04:07
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.6
 
@@ -40,14 +40,25 @@ CREATE TABLE `recursos` (
 --
 
 INSERT INTO `recursos` (`id_recurso`, `recurso`, `germinacion`, `id_zona`, `imagen`) VALUES
-(7, 'Campanilla de invierno', 'Invierno', 6, ''),
-(8, 'Cono de pino', 'Perenne', 2, ''),
-(13, 'Manzanilla', 'Verano', 7, ''),
-(19, 'Laurel', 'Invierno', 2, ''),
-(20, 'Pétalos de rosa', 'Primavera', 7, ''),
-(23, 'Lágrima ceniza', 'Otoño', 2, ''),
-(24, 'Lágrima gris', 'Otoño', 11, ''),
-(26, 'Carne de jabalí', '', 2, '');
+(1, 'Corteza de sauce', 'Perenne', 6, NULL),
+(2, 'Corteza de cerezo', 'Primavera', 3, NULL),
+(3, 'Carbón activado', '', 4, NULL),
+(4, 'Escama de nishikigoi', '', 1, NULL),
+(5, 'Flor de cerezo', 'Primavera', 5, NULL),
+(6, 'Semilla de girasol', 'Verano', 2, NULL),
+(7, 'Campanilla de invierno', 'Invierno', 7, NULL),
+(8, 'Cono de pino', 'Perenne', 3, NULL),
+(9, 'Lavanda', 'Primavera', 7, NULL),
+(10, 'Áloe vera', 'Perenne', 8, NULL),
+(11, 'Romero', 'Otoño', 5, NULL),
+(12, 'Hoja de menta', 'Invierno', 5, NULL),
+(13, 'Manzanilla', 'Verano', 6, NULL),
+(14, 'Caléndula', 'Primavera', 1, NULL),
+(15, 'Diente de león', 'Primavera', 2, NULL),
+(16, 'Árnica', 'Verano', 2, NULL),
+(17, 'Lirio cala', 'Primavera', 3, NULL),
+(18, 'Margarita', 'Verano', 6, NULL),
+(19, 'Corteza de bambú', 'Perenne', 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -59,7 +70,6 @@ CREATE TABLE `reseñas` (
   `id_review` int(11) NOT NULL,
   `review` varchar(500) NOT NULL,
   `valoracion` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `id_recurso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -67,16 +77,59 @@ CREATE TABLE `reseñas` (
 -- Volcado de datos para la tabla `reseñas`
 --
 
-INSERT INTO `reseñas` (`id_review`, `review`, `valoracion`, `id_user`, `id_recurso`) VALUES
-(1, 'esta flor es la mejor', 0, 0, 7),
-(3, 'aguante la manzanilla Nico Dazeo', 0, 0, 9),
-(4, 'Dottori volve', 0, 0, 12),
-(5, 'hola Franco', 0, 0, 13),
-(7, 'a ver si se agrega esta poronga carcomida por murcielagos', 0, 0, 15),
-(8, 'cuando el tiempo pasa y nos hacemos viejos', 0, 0, 19),
-(13, 'pino erere', 3, 0, 22),
-(16, 'bife de perro', 1, 0, 26),
-(18, 'laurel hermoso', 4, 0, 19);
+INSERT INTO `reseñas` (`id_review`, `review`, `valoracion`, `id_recurso`) VALUES
+(1, 'Muy saludable!', 3, 10),
+(3, 'Aromática y agradable', 4, 16),
+(4, 'Ideal para quemaduras', 4, 10),
+(5, 'Es muy viscoso', 2, 10),
+(6, 'Queda muy rica con el arroz', 4, 16),
+(7, 'Puede ser tóxica, no la recomiendo cerca de los niños', 2, 16),
+(8, 'No me gusta nada', 1, 16),
+(9, 'Genial para quemaduras y raspones', 4, 14),
+(10, 'Queda muy rica en el té!', 3, 14),
+(11, 'Es de las plantas más bonitas que he visto', 4, 7),
+(12, 'Ideal para resfríos ', 5, 7),
+(13, 'Es muy difícil conseguirla', 1, 7),
+(14, 'Lima asperezas de la piel', 3, 3),
+(15, 'Podría ser mejor para tratar la piel', 2, 3),
+(16, 'Muy bueno!', 4, 3),
+(17, 'Abundan en cantidad, muy fáciles de conseguir', 3, 8),
+(18, 'Buenos para generar fuego', 3, 8),
+(19, 'No los veo muy útiles', 2, 8),
+(20, 'Versátil y duradera', 4, 19),
+(21, 'De mis favoritas!', 5, 19),
+(22, 'Aromática y resistente', 4, 2),
+(23, 'No me parece muy útil', 1, 2),
+(24, 'Está genial, de gran calidad', 4, 1),
+(25, 'Bastante endeble', 2, 1),
+(26, 'De muy fácil acceso', 3, 15),
+(27, 'No me resulta muy aromática', 2, 15),
+(28, 'Me encanta usarlas en joyas', 5, 4),
+(29, 'Le dan un bonito toque para decorar', 4, 4),
+(30, 'Muy aromática en té', 4, 5),
+(31, 'Grandes propiedades medicinales', 4, 5),
+(32, 'Dura muy poco', 2, 5),
+(33, 'Ideal en té y diversas bebidas, tragos también', 4, 12),
+(34, 'Se puede congelar y usar luego, es genial', 5, 12),
+(35, 'Crecen demasiado y son molestas', 2, 12),
+(36, 'Atrae muchas abejas', 2, 9),
+(37, 'De aroma precioso e imagen amable', 4, 9),
+(38, 'Es algo difícil de conseguir', 2, 17),
+(39, 'Se ahogan con facilidad', 1, 17),
+(40, 'Posee grandes propiedades medicinales!', 4, 17),
+(41, 'Riquísima en té ', 4, 13),
+(42, 'Muy rico aroma!', 4, 13),
+(43, 'No me gustan mucho', 2, 13),
+(44, 'De fácil acceso, muy versátiles', 4, 18),
+(45, 'Suelen estar infectadas por otros animales', 2, 18),
+(46, 'No las uso mucho', 2, 18),
+(47, 'Muy aromática ', 3, 11),
+(48, 'Queda rica en muchas comidas', 4, 11),
+(49, 'Detesto su sabor', 1, 11),
+(50, 'Ricas y abundantes ', 4, 6),
+(51, 'Con grandes capacidades medicinales!', 4, 6),
+(52, 'Tostadas son lo mejor', 5, 6),
+(53, 'Hay semillas mucho más ricas', 2, 6);
 
 -- --------------------------------------------------------
 
@@ -96,9 +149,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_user`, `email`, `pass`, `administrador`) VALUES
-(1, 'kohaku_kun@gmail.com', 'zeoQsYW0zXncI', 0),
-(2, 'hideyoshi_soga@gmail.com', '$argon2id$v=19$m=65536,t=4,p=1$eUlJRE04NTFxQlVFQVhvRg$8vN4P00ve6GROVQhmgNTT/0XtEedwaI0lXgRK9tvEXU', 1),
-(3, 'takeda_minamoto@gmail.com', '$2y$10$mxfNfse4dJLFDJX6xp1KDurGSGpmFHKzVoB.C3LfhhOLik9H/2crS', 0);
+(1, 'belen@gmail.com', '$2y$10$O/yfgmTnX5suUhHRvFi1ReJVgHX9Nvh9gylM1Yg559dqpQxy.xAGC', 0),
+(2, 'manuel@gmail.com', '$2y$10$JG/qWkESgqjfIxncudE1E.sCc7E6C8dw1uefJq6MfFhj9x3bScOQK', 1);
 
 -- --------------------------------------------------------
 
@@ -118,12 +170,14 @@ CREATE TABLE `zonas` (
 --
 
 INSERT INTO `zonas` (`id_zona`, `zona`, `prefectura`, `ciudad_cercana`) VALUES
-(2, 'Bosque Sagano', 'Kioto', 'Nara'),
-(3, 'Cascada Nachi', 'Wakayama', 'Higashimuro'),
-(6, 'Monte Tokachi', 'Hokkaido', 'Daisetsuzan'),
+(1, 'Estanque azul', 'Hokkaido', 'Kamikawa'),
+(2, 'Monte Tokachi', 'Hokkaido', 'Daisetsuzan'),
+(3, 'Bosque Sagano', 'Kioto', 'Arashiyama'),
+(4, 'Volcán Aogashima', 'Izu', 'Aogashima'),
+(5, 'Monte Koya', 'Wakayama', 'Osaka'),
+(6, 'Bosque de Shikoku', 'Shikoku', NULL),
 (7, 'Prado Kenrokuen', 'Ishikawa', 'Kanazawa'),
-(11, 'Volcán Aogashine', 'Izu', 'Aogashima'),
-(15, 'Bosque de Kamakura', 'Kanegawa', 'Kamakura');
+(8, 'Cascada Nachi', 'Wakayama', 'Higashimuro');
 
 --
 -- Índices para tablas volcadas
@@ -141,7 +195,6 @@ ALTER TABLE `recursos`
 --
 ALTER TABLE `reseñas`
   ADD PRIMARY KEY (`id_review`),
-  ADD KEY `id_user` (`id_user`),
   ADD KEY `id_recurso` (`id_recurso`);
 
 --
@@ -164,25 +217,25 @@ ALTER TABLE `zonas`
 -- AUTO_INCREMENT de la tabla `recursos`
 --
 ALTER TABLE `recursos`
-  MODIFY `id_recurso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id_recurso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `reseñas`
 --
 ALTER TABLE `reseñas`
-  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_review` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `zonas`
 --
 ALTER TABLE `zonas`
-  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_zona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
@@ -193,6 +246,12 @@ ALTER TABLE `zonas`
 --
 ALTER TABLE `recursos`
   ADD CONSTRAINT `recursos_ibfk_1` FOREIGN KEY (`id_zona`) REFERENCES `zonas` (`id_zona`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `reseñas`
+--
+ALTER TABLE `reseñas`
+  ADD CONSTRAINT `reseñas_ibfk_1` FOREIGN KEY (`id_recurso`) REFERENCES `recursos` (`id_recurso`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
