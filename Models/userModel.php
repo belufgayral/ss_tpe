@@ -1,5 +1,5 @@
 <?php
-    class generalModel{
+    class userModel{
 
         private $db;
 

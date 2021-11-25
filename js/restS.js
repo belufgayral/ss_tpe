@@ -42,9 +42,9 @@ async function getReviews() {
 }
 
 async function getIfAdminSession(){
-    console.log("funcion anda");
+    
     try {
-        console.log("anda?")
+        console.log("hi");
         let res = await fetch(API_URL);
         let session = await res.json();
         console.log(session);

@@ -1,11 +1,11 @@
 <?php
-require_once 'Controllers/generalController.php';
+require_once 'Controllers/userController.php';
 require_once 'Controllers/resourcesController.php';
 require_once 'Controllers/zonesController.php';
 
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
-    $generalController = new generalController();
+    $userController = new userController();
     $resourcesController = new resourcesController();
     $zonesController = new zonesController();
 
@@ -19,22 +19,22 @@ require_once 'Controllers/zonesController.php';
 
     switch($parameters[0]){
         case 'home':
-            $generalController->goToRenderHome();
+            $userController->goToRenderHome();
             break;
         case 'login':
-            $generalController->goToLogin();
+            $userController->goToLogin();
             break;
         case 'logout':
-            $generalController->logOut();
+            $userController->logOut();
             break;
         case 'register': 
-            $generalController->goToRegisterUser();
+            $userController->goToRegisterUser();
             break;
         case 'registerUser':
-            $generalController->registerUser();
+            $userController->registerUser();
             break;
         case 'verifyLogin':
-            $generalController->verifyLogin($_POST['email'], $_POST['password']);
+            $userController->verifyLogin($_POST['email'], $_POST['password']);
             break;
         case 'details':
             $resourcesController->goToDetails($parameters[1]);
@@ -45,7 +45,7 @@ require_once 'Controllers/zonesController.php';
             } else if ($parameters[1] == "zones") {
                 $zonesController->goToTableZones();
             } else if ($parameters[1] == "panel") {
-                $generalController->goToPanel();
+                $userController->goToPanel();
             }
             break;
         case 'add':
@@ -63,14 +63,14 @@ require_once 'Controllers/zonesController.php';
             } else if ($parameters[1] == "zone") {
                 $zonesController->goToDeleteZone($parameters[2]);
             } else if ($parameters[1] == "user") {
-                $generalController->goToDeleteUser($parameters[2]);
+                $userController->goToDeleteUser($parameters[2]);
             }
             break;
         case 'warning':
             if ($parameters[1] == "zone") {
                 $zonesController->goToWarning($parameters[2]);
             } else if ($parameters[1] == "panel") {
-                $generalController->goToWarning($parameters[2]);
+                $userController->goToWarning($parameters[2]);
             }
             break;
         case 'getUpdate':
@@ -79,7 +79,7 @@ require_once 'Controllers/zonesController.php';
             } else if ($parameters[1] == "zone") {
                 $zonesController->goToUpdatedZonesForm($parameters[2]);
             } else if ($parameters[1] == "user") {
-                $generalController->goToChangeStatus($parameters[2]);
+                $userController->goToChangeStatus($parameters[2]);
             }
             break;
         case 'updateResource':                    
@@ -98,10 +98,7 @@ require_once 'Controllers/zonesController.php';
                 $resourcesController->goToFilterZone();
             }
             break;
-        /* case 'resourcesPerZone':
-            $zonesController->goToResourcesPerZone($parameters[1], $parameters[2]); 
-            break; */
         default:
-            $generalController->goToError();
+            $userController->goToError();
             break;
     }

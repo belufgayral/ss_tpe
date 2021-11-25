@@ -1,7 +1,7 @@
 <?php
 require_once './Models/zonesModel.php';
 require_once './Views/zonesView.php';
-require_once './Views/generalView.php';
+require_once './Views/userView.php';
 require_once './Helpers/AuthHelper.php';
 
 class zonesController{
@@ -14,7 +14,7 @@ class zonesController{
     function __construct() {
         $this->model = new zonesModel();
         $this->view = new zonesView();
-        $this->viewU = new generalView();
+        $this->viewU = new userView();
         $this->authHelper = new AuthHelper();
     }
 

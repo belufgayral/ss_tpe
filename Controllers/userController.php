@@ -1,20 +1,20 @@
 <?php
 require_once './Models/resourcesModel.php';
-require_once './Models/generalModel.php';
-require_once './Views/generalView.php';
+require_once './Models/userModel.php';
+require_once './Views/userView.php';
 require_once './Helpers/AuthHelper.php';
 
-class generalController{
+class userController{
 
     private $modelR;
-    private $modelG;
+    private $modelU;
     private $view;
     private $authHelper;
 
     function __construct() {
         $this->modelR = new resourcesModel();
-        $this->modelG = new generalModel();
-        $this->view = new generalView();
+        $this->modelU = new userModel();
+        $this->view = new userView();
         $this->authHelper = new AuthHelper();
     }
 
@@ -26,7 +26,7 @@ class generalController{
         $u = $email; // email ingresado por el usuario
         $p = $password; //password ingresado por el usuario
 
-        $dbUser = $this->modelG->getUserByEmail($u);
+        $dbUser = $this->modelU->getUserByEmail($u);
         $dbHash = $dbUser->pass; // en esta variable se guarda el hash traido de la db
 		$boolAdmin = $dbUser->administrador; // en esta variable se guarda el valor booleano sobre admin traido de la db
 
@@ -80,7 +80,7 @@ class generalController{
     public function registerUser() { 
         if ($_POST['password'] === $_POST['checkpassword']) { //si password y re-password son iguales cuando se ingresan...
             $encryptedPass = password_hash($_POST['password'], PASSWORD_BCRYPT); //se hace el hash del pass venido por POST
-            $this->modelG->addUser($_POST['email'], $encryptedPass); //se manda al modelo el email venido por POST y la contraseña hasheada
+            $this->modelU->addUser($_POST['email'], $encryptedPass); //se manda al modelo el email venido por POST y la contraseña hasheada
             $this->verifyLogin($_POST['email'], $_POST['password']); //hace el verify para iniciar sesion ni bien se complete el registro   
         } else {
             $this->view->renderRegisterForm("Por favor, introduzca correctamente su contraseña"); //de aca puede venir el warning
@@ -90,7 +90,7 @@ class generalController{
     public function goToPanel() {
         if ($this->authHelper->checkIfAdminLogged()) { //chequeo si está sesionando el admin
             $admin = $_SESSION['admin'];
-            $users = $this->modelG->getAllUsers(); //traigo todos los usuarios con todas las filas y columnas
+            $users = $this->modelU->getAllUsers(); //traigo todos los usuarios con todas las filas y columnas
             $this->view->renderPanel($users, $admin); //paso de params los usuarios y el session admin que es el email del admin (no olvidar que el session es como un arreglo asociativo)
         } else {
         $this->view->renderLogin();
@@ -99,12 +99,12 @@ class generalController{
 
     public function goToChangeStatus($id) { //aca viene el id del usuario a modificar en el panel
         if ($this->authHelper->checkIfAdminLogged()) { //aca se fija si está sesionando el admin
-            $user = $this->modelG->getUserById($id); //trae un usuario unico por id
+            $user = $this->modelU->getUserById($id); //trae un usuario unico por id
 
             if ($user->administrador == 1) { //si es admin...
-                $this->modelG->updateStatus($id, 0); //lo hace usuario cambiando el booleano
+                $this->modelU->updateStatus($id, 0); //lo hace usuario cambiando el booleano
             } else if ($user->administrador == 0) { //y si no...
-                $this->modelG->updateStatus($id, 1); // al reves
+                $this->modelU->updateStatus($id, 1); // al reves
             }
         } else {
             $this->view->renderLogin();
@@ -115,13 +115,13 @@ class generalController{
     }
 
     public function goToWarning($id) { // aca viene el id del usuario
-        $user = $this->modelG->getUserById($id); //trae el usuario por id
+        $user = $this->modelU->getUserById($id); //trae el usuario por id
         $this->view->renderWarning($id, $user->email); //renderizo la advertencia con el email del usuario y el id por param
     }
 
     public function goToDeleteUser($id) { // viene el id del warning.tpl //la sesión de un usuario eliminado permanece abierta
         if ($this->authHelper->checkIfAdminLogged()) { // se hace un chequeo si sos admin
-            $this->modelG->deleteUser($id); // se va al model y se elimina usuario por id
+            $this->modelU->deleteUser($id); // se va al model y se elimina usuario por id
         } else {
             $this->view->renderLogin();
         }
